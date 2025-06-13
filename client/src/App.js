@@ -15,6 +15,7 @@ const Profile = lazy(() => import("./pages/Profile"));
 const Notifications = lazy(() => import("./pages/Notifications"));
 const ApplyDoctor = lazy(() => import("./pages/ApplyDoctor"));
 const Error = lazy(() => import("./pages/Error"));
+const SymptomChecker = lazy(() => import("./pages/SymptomChecker")); // Add this import at the top with others
 
 function App() {
   return (
@@ -22,10 +23,7 @@ function App() {
       <Toaster />
       <Suspense fallback={<Loading />}>
         <Routes>
-          <Route
-            path="/login"
-            element={<Login />}
-          />
+          <Route path="/login" element={<Login />} />
           <Route
             path="/register"
             element={
@@ -34,14 +32,8 @@ function App() {
               </Public>
             }
           />
-          <Route
-            path="/"
-            element={<Home />}
-          />
-          <Route
-            path="/doctors"
-            element={<Doctors />}
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/doctors" element={<Doctors />} />
           <Route
             path="/appointments"
             element={
@@ -91,6 +83,15 @@ function App() {
             }
           />
           <Route
+            path="/symptom-checker"
+            element={
+              <Protected>
+                <SymptomChecker />
+              </Protected>
+            }
+          />
+
+          <Route
             path="/dashboard/appointments"
             element={
               <Protected>
@@ -106,10 +107,7 @@ function App() {
               </Protected>
             }
           />
-          <Route
-            path="*"
-            element={<Error />}
-          />
+          <Route path="*" element={<Error />} />
         </Routes>
       </Suspense>
     </Router>
